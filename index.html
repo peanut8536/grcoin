@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>가락시장역 알바생 모집</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      background: radial-gradient(circle at top, #ffe7f3 0, #f4f4ff 40%, #f9fafb 100%);
+      color: #111827;
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px 18px 120px;
+    }
+
+    header {
+      text-align: center;
+      padding: 24px 0 16px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 999px;
+      padding: 5px 13px;
+      font-size: 13px;
+      color: #6b7280;
+      border: 1px solid #e5e7eb;
+      backdrop-filter: blur(6px);
+    }
+
+    .badge span.emoji {
+      font-size: 15px;
+    }
+
+    .title {
+      font-size: clamp(26px, 5vw, 34px);
+      font-weight: 800;
+      margin-top: 18px;
+      margin-bottom: 10px;
+      letter-spacing: -0.03em;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: #4b5563;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .highlight-box {
+      margin-top: 22px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid #f9a8d4;
+      font-size: 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .highlight-box strong {
+      color: #db2777;
+    }
+
+    .grid {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.97);
+      border-radius: 20px;
+      padding: 20px 18px 18px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+      border: 1px solid #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+      gap: 8px;
+    }
+
+    .card-title {
+      font-size: 17px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title span.emoji {
+      font-size: 22px;
+    }
+
+    .card-tag {
+      font-size: 12px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+      white-space: nowrap;
+    }
+
+    .card ul {
+      list-style: none;
+      font-size: 14px;
+      color: #374151;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .card ul li::before {
+      content: "• ";
+      color: #f97316;
+    }
+
+    .card small {
+      font-size: 13px;
+      color: #9ca3af;
+      margin-top: 6px;
+    }
+
+    .section {
+      margin-top: 34px;
+      background: rgba(15, 23, 42, 0.97);
+      color: #f9fafb;
+      border-radius: 24px;
+      padding: 22px 18px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.4);
+    }
+
+    .section-header {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .section-header-text {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title span.emoji {
+      font-size: 22px;
+    }
+
+    .section-sub {
+      font-size: 14px;
+      color: #e5e7eb;
+    }
+
+    .kakao-id-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 13px;
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 999px;
+      border: 1px dashed rgba(249, 250, 251, 0.35);
+      font-size: 14px;
+    }
+
+    .kakao-id-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #9ca3af;
+    }
+
+    .kakao-id-value {
+      font-weight: 700;
+      color: #facc15;
+      font-size: 15px;
+    }
+
+    .cta-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .cta-main {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 11px 18px;
+      border: none;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(135deg, #f97316, #ec4899);
+      color: #f9fafb;
+      box-shadow: 0 12px 25px rgba(236, 72, 153, 0.45);
+      transition: transform 0.08s ease, box-shadow 0.08s ease;
+      white-space: nowrap;
+    }
+
+    .cta-main:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 35px rgba(236, 72, 153, 0.55);
+    }
+
+    .cta-main:active {
+      transform: translateY(0);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.7);
+    }
+
+    .cta-main .icon {
+      font-size: 18px;
+    }
+
+    .hint {
+      font-size: 13px;
+      color: #9ca3af;
+      margin-top: -2px;
+    }
+
+    .copy-btn {
+      font-size: 12px;
+      border-radius: 999px;
+      padding: 7px 11px;
+      border: 1px solid rgba(156, 163, 175, 0.7);
+      background: rgba(17, 24, 39, 0.9);
+      color: #e5e7eb;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .copy-btn:active {
+      background: rgba(31, 41, 55, 0.95);
+    }
+
+    .bottom-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(17, 24, 39, 0.98);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(55, 65, 81, 0.9);
+      padding: 10px 16px 12px;
+      display: flex;
+      justify-content: center;
+      z-index: 50;
+    }
+
+    .bottom-inner {
+      width: 100%;
+      max-width: 960px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: #e5e7eb;
+      font-size: 13px;
+      flex-wrap: wrap;
+    }
+
+    .bottom-text strong {
+      color: #fbbf24;
+    }
+
+    .bottom-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 999px;
+      padding: 9px 16px;
+      font-size: 13px;
+      border: none;
+      background: #f97316;
+      color: #111827;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(249, 115, 22, 0.65);
+      white-space: nowrap;
+    }
+
+    .bottom-cta .icon {
+      font-size: 16px;
+    }
+
+    /* 모바일 최적화 */
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px 16px 130px;
+      }
+
+      header {
+        padding-top: 18px;
+      }
+
+      .title {
+        font-size: 26px;
+      }
+
+      .subtitle {
+        font-size: 15px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .card {
+        padding: 18px 16px 16px;
+      }
+
+      .section {
+        padding: 18px 16px 16px;
+      }
+
+      .section-header {
+        align-items: flex-start;
+      }
+
+      .cta-wrap {
+        justify-content: flex-start;
+      }
+
+      .bottom-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="container">
+      <!-- 헤더 -->
+      <header>
+        <div class="badge">
+          <span class="emoji">🆕</span>
+          <span>신생 매장 알바생 상시 모집</span>
+        </div>
+        <h1 class="title">가락시장역 1분, 편하게 벌고 든든하게 케어받자</h1>
+        <p class="subtitle">
+          초보도 환영! 실장이 처음부터 끝까지 책임지고 케어하는 곳에서<br />
+          안전하고 편하게, 그리고 제대로 벌어가세요.
+        </p>
+
+        <div class="highlight-box">
+          <span>💬</span>
+          <span><strong>“일단 한번 편하게 이야기 나눠봐요!”</strong> 면접은 정말 편안한 티타임이라고 생각하고 오세요 ☕</span>
+        </div>
+      </header>
+
+      <!-- 주요 장점 카드들 -->
+      <section class="grid">
+        <!-- 1. 실장 케어 -->
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <span class="emoji">💪</span>
+              <span>든든한 실장 케어</span>
+            </div>
+            <div class="card-tag">신생 특혜</div>
+          </div>
+          <ul>
+            <li>제가 새로 온 실장인 만큼, 같이 시작하는 마음으로 세심하게 챙겨드려요!</li>
+            <li>초보분들을 위한 맞춤 교육 &amp; 빠른 적응 집중 지원! (걱정은 넣어두세요!)</li>
+            <li>블랙 손님 관리는 실장이 앞에서 확실히 책임집니다 🙅‍♀️</li>
+          </ul>
+          <small>※ 불편한 상황은 혼자 감당하지 않도록 실장이 끝까지 케어합니다.</small>
+        </article>
+
+        <!-- 2. 위치 & 손님 회전율 -->
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <span class="emoji">🚉</span>
+              <span>최강의 위치 &amp; 손님 회전율</span>
+            </div>
+            <div class="card-tag">가락시장역 1분</div>
+          </div>
+          <ul>
+            <li>가락시장역 1분 거리! ⏰ (지하철 내려서 바로 출근!)</li>
+            <li>주변 오피스 상권이라 손님 퀄리티가 높고, 회전율도 빨라요!</li>
+            <li>서울 전역 출퇴근 지원 가능, 최대한 편하게 일하실 수 있게 도와드립니다.</li>
+          </ul>
+          <small>※ 출퇴근 경로, 이동 수단 등 편하게 상담 주세요.</small>
+        </article>
+
+        <!-- 3. 높은 페이 & 당일 지급 -->
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <span class="emoji">💸</span>
+              <span>높은 페이 &amp; 당일 지급</span>
+            </div>
+            <div class="card-tag">당일 정산</div>
+          </div>
+          <ul>
+            <li>노력한 만큼 확실하게 벌어가셔야죠! 업계 최고 수준의 페이를 매일매일 바로 드립니다.</li>
+            <li>근무 후 <strong>당일 정산</strong>으로 바로바로 가져가실 수 있어요.</li>
+            <li>추가적인 만근비, 식사 제공 등 복리후생도 놓치지 않아요! 🍱</li>
+          </ul>
+          <small>※ 실제 조건은 상담 시 투명하게 안내드립니다.</small>
+        </article>
+
+        <!-- 4. 근무시간 & 요일 -->
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <span class="emoji">⏰</span>
+              <span>근무시간 &amp; 요일</span>
+            </div>
+            <div class="card-tag">자유 스케줄</div>
+          </div>
+          <ul>
+            <li>월~일, 24시간 중 <strong>원하는 시간</strong>, <strong>원하는 만큼</strong> 근무 가능!</li>
+            <li><strong>1시간만 일하고 가도 OK</strong> — 진짜 부담 없이 선택 근무 가능해요.</li>
+            <li>24시간 바빠요 ㅠㅠ 손님이 많아서 원할 때 바로바로 투입 가능합니다.</li>
+          </ul>
+          <small>※ 스케줄은 전적으로 본인 선택! 완전 자유 근무 시스템입니다.</small>
+        </article>
+      </section>
+
+      <!-- 지원 방법 섹션 -->
+      <section class="section" id="apply">
+        <div class="section-header">
+          <div class="section-header-text">
+            <div class="section-title">
+              <span class="emoji">💌</span>
+              <span>지원 방법 &amp; 문의</span>
+            </div>
+            <p class="section-sub">
+              카카오톡으로 <strong>편하게 먼저 말</strong> 걸어주세요!<br />
+              궁금한 점 모두 투명하게 말씀드릴게요.
+            </p>
+          </div>
+          <div class="cta-wrap">
+            <div class="kakao-id-box">
+              <div>
+                <div class="kakao-id-label">KAKAO ID</div>
+                <div class="kakao-id-value">bodo7</div>
+              </div>
+              <button class="copy-btn" type="button" onclick="copyKakaoId()">ID 복사</button>
+            </div>
+            <button class="cta-main" type="button" onclick="openKakao()">
+              <span class="icon">💬</span>
+              <span>카카오톡으로 문의하기</span>
+            </button>
+          </div>
+        </div>
+
+        <p class="hint">
+          👀 <strong>“일단 한번 편하게 이야기 나눠봐요!”</strong><br />
+          24시간 언제든지 연락 주시면, 궁금한 점 모두 투명하게 말씀드리겠습니다.<br />
+          면접은 딱딱한 면접이 아니라, <strong>편안한 티타임</strong>이라고 생각하고 오세요 ☕
+        </p>
+      </section>
+    </div>
+
+    <!-- 하단 고정 CTA 바 -->
+    <div class="bottom-bar">
+      <div class="bottom-inner">
+        <div class="bottom-text">
+          지금 바로 <strong>카카오톡 검색창에 "bodo7"</strong>을 입력해보세요.
+        </div>
+        <button class="bottom-cta" type="button" onclick="copyKakaoId()">
+          <span class="icon">📋</span>
+          <span>ID 복사하고 톡 보내기</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 카카오톡 ID 복사 기능
+    function copyKakaoId() {
+      const kakaoId = "bodo7";
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(kakaoId)
+          .then(() => {
+            alert("카카오톡 ID가 복사되었습니다: " + kakaoId);
+          })
+          .catch(() => {
+            fallbackCopyText(kakaoId);
+          });
+      } else {
+        fallbackCopyText(kakaoId);
+      }
+    }
+
+    function fallbackCopyText(text) {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.left = "-9999px";
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      try {
+        document.execCommand("copy");
+        alert("카카오톡 ID가 복사되었습니다: " + text);
+      } catch (err) {
+        alert("복사를 실패했습니다. 직접 입력해주세요: " + text);
+      }
+      document.body.removeChild(textarea);
+    }
+
+    // 카카오톡 실행(모바일에서 카카오톡 앱 열기 시도)
+    function openKakao() {
+      // 실제 카카오톡 오픈채팅/프로필 링크가 있다면 여기 연동하면 됩니다.
+      // 현재는 ID 복사만 진행합니다.
+      copyKakaoId();
+    }
+  </script>
+</body>
+</html>
